@@ -1,0 +1,14 @@
+push 0x4
+push 0x0123
+push 0x0001
+push 0x000f
+push 0xffff
+push 0xaaaa
+push 1 1 1
+push 2
+push 4
+push 8
+push 16
+push 32
+push 64
+push 128

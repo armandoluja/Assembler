@@ -1,0 +1,17 @@
+pop 00000
+pushui 00001
+pushli 00010
+push 00011
+add 00100
+or 00101
+neg 00110
+dupo 00111
+j 01000
+beq 01001
+bne 01010
+slt 01011
+and 01100
+store 01101
+repo 01110
+wait 01111
+output 10000

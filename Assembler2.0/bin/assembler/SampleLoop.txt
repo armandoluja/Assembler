@@ -1,0 +1,21 @@
+	pushi 0x13b0
+	pushi 0
+LOOP:	
+	pushi 10
+	dupo 1
+	dupo 1
+	slt
+	pushi 0 	
+	pushi END
+	beq	
+	dupo 2	
+	dupo 3
+	add
+	repo 3
+	dupo 1 
+	pushi 1
+	add	
+	repo 2	
+	pushi LOOP 	
+	j		
+END:

@@ -1,0 +1,33 @@
+pushui 00000000
+pushli 00000010
+or
+pushui 00000000
+pushli 00000000
+or
+pushui 00000000
+pushli 00001010
+or
+dupo 0000000000000001
+dupo 0000000000000001
+slt
+pushui 00000000
+pushli 00000000
+or
+pushui ::upper::END
+pushli ::lower::END
+or
+beq
+dupo 0000000000000010
+dupo 0000000000000011
+add
+repo 0000000000000011
+dupo 0000000000000001
+pushui 00000000
+pushli 00000001
+or
+add
+repo 0000000000000010
+pushui 00000000
+pushli 00000111
+or
+j

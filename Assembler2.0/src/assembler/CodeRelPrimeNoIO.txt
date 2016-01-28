@@ -1,0 +1,67 @@
+	pushli 10
+	pushli 2
+relLoop:
+	dupo 0
+	dupo 2
+	pushi gcd
+	j
+inRelLoop:
+	pushli 1
+	pushi relPrimeRet
+	beq
+	dupo 0
+	pushli 1
+	add
+	repo 1
+	pop
+	pushi relLoop
+	j
+relPrimeRet:
+	repo 1
+	pop
+	output
+	pushi exit
+	j
+gcd:
+	dupo 0
+	pushli 0
+	pushi gcdLoop
+	bne
+	pop
+	pushi inRelLoop
+	j
+gcdLoop:
+	dupo 1
+	pushli 0
+	pushi gcdExit
+	beq
+	dupo 1
+	dupo 1
+	slt
+	pushli 1
+	pushi gcdWhileElse
+	bne
+	dupo 0
+	dupo 2
+	neg
+	add
+	repo 1
+	pop
+	pushi gcdLoop
+	j
+gcdWhileElse:
+	dupo 1
+	dupo 1
+	neg
+	add
+	repo 2
+	pop
+	pushi gcdLoop
+	j
+gcdExit:
+	repo 1
+	pop
+	pushi inRelLoop
+	j
+exit:
+	pop

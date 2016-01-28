@@ -1,0 +1,68 @@
+pushli 0		                // make space for input "n"
+wait			// wait for input
+pushli 2		                // puts "m" = 2 on stack	
+relLoop:			// while(gcd(n,m)!=1)
+dupo 0			// copy b to top of stack
+dupo 2			// copy a to top of stack
+pushi gcd		// put label of GCD on stack
+j			// jump to gcd, gcd will leave result on top of stack
+inRelLoop:
+pushli 1		                // put 1 on top of stack
+pushi relPrimeRet	//
+beq			// if(gcd(n,m) == 1, then jump to label
+dupo 0			// copy m
+pushli 1		                // put 1 on stack
+add			// m+1 on stack
+repo 1			// m = m + 1
+pop			// remove "m+1" from top
+pushi relLoop		//
+j			// jump back to while loop
+relPrimeRet:		// this will return "m"
+repo 1			// copy m to where n was
+pop			// pop 
+output
+pushi exit
+j
+gcd:			// assuming that args were pushed in reverse order (b, then a)
+dupo 0			// copy "a" to top of stack
+pushli 0		                // put 0 on stack to compare
+pushi gcdLoop		// label to jump to if "a" != 0
+bne			//
+pop			// we pop "a" off the stack, leaving b on top (as the ret value)
+pushi inRelLoop		// push the return address
+j			// jump to relprime
+gcdLoop:		// while(b != 0)
+dupo 1			// copy "b" to top of stack
+pushli 0		                // put 0 on top of stack
+pushi gcdExit		// label to jump to if "b"== 0 (to return "a" and leave gcd)
+beq			//
+dupo 1			// if statement starts here, copy "b" to top of stack
+dupo 1			// copy "a" to top of stack
+slt			// (b < a) ? 1 : 0
+pushli 1		                // put 1 on stack
+pushi gcdWhileElse	// label of else statement
+bne			// slt != 1? (jump to else) : continue
+dupo 0			// copy a
+dupo 2			// copy b
+neg			// b = -b
+add			// a - b
+repo 1			// a = a + (-b)
+pop			// remove a - b
+pushi gcdLoop		// jump to gcdLoop again
+j
+gcdWhileElse:		// b = b-a
+dupo 1			// copy "a" to top of stack
+dupo 1			// copy "b" to top of stack
+neg			// a = -a
+add			// push "b + (-a)" onto stack
+repo 2			// b = b + (-a)
+pop
+pushi gcdLoop		// jump to gcdLoop again
+j
+gcdExit:			// return "a"
+repo 1			// copy value of "a" into "b", since we will pop "a" off
+pop			// pop off the top of the stack, leaves the value of "a"
+pushi inRelLoop		//
+j        //
+exit:
+pop
